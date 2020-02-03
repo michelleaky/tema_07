@@ -19,26 +19,55 @@
 
 
     <script>
-        document.querySelector("button").addEventListener("click", buttonClicked);
+        let length = prompt("Angiv længde");
+        let width = prompt("Angiv bredde");
 
 
-        function buttonClicked() {
-            let length = document.querySelector("#length").value;
-            let width = document.querySelector("#width").value;
+        function areal(l, w) {
+            let a = (l * w);
 
-            let resultat = (`Arealet er ${areal(length, width)} !`);
-
-
-            if (areal <= 0) {
-                resultat = "Ugyldig";
-
-                console.log(resultat);
+            if (a <= 0) {
+                return (`Tallet er ugyldigt. Prøv igen`);
+            } else {
+                return (`Arealet er ${a}. Vil du prøve igen?`)
             }
         }
 
-        function areal(l, w) {
-            return (l * w);
+        let resultalt = areal(length, width);
+        confirm(resultalt);
+
+        if (confirm) {
+            location.reload();
         }
+
+
+
+
+
+
+
+
+
+        //        document.querySelector("button").addEventListener("click", buttonClicked);
+        //
+        //
+        //        function buttonClicked() {
+        //            let length = document.querySelector("#length").value;
+        //            let width = document.querySelector("#width").value;
+        //
+        //            let resultat = (`Arealet er ${areal(length, width)} !`);
+        //
+        //
+        //            if (areal <= 0) {
+        //                resultat = "Ugyldig";
+        //
+        //                console.log(resultat);
+        //            }
+        //        }
+        //
+        //        function areal(l, w) {
+        //            return (l * w);
+        //        }
 
     </script>
 </body>
