@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Areal øvelse</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <p>Hvad er længden?</p>
+    <input type="tekst" id="length">
+    <p>Hvad er bredden?</p>
+    <input type="tekst" id="width">
+    <button>Se resultat i consollen</button>
+
+
+
+    <script>
+        document.querySelector("button").addEventListener("click", buttonClicked);
+
+
+        function buttonClicked() {
+            let length = document.querySelector("#length").value;
+            let width = document.querySelector("#width").value;
+            let areal = length * width;
+
+
+            let resultat = (`Arealet er ${areal} !`)
+
+            console.log(resultat);
+        }
+
+    </script>
+</body>
+
+</html>
