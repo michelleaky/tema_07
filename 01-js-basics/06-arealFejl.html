@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Areal øvelse</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+
+
+    <script>
+        let length = prompt("Angiv længde");
+        let width = prompt("Angiv bredde");
+
+
+        function areal(l, w) {
+            let a = (l * w);
+
+            if (a == 0) {
+                return (`Husk længde og bredde skal være et tal. Prøv igen`);
+            } else if (isNaN(a)) {
+                return (`Fejl. Prøv igen med tal`);
+            } else {
+                return (`Arealet er ${a}. Vil du prøve igen?`)
+            }
+        }
+
+        let resultalt = areal(length, width);
+        confirm(resultalt);
+
+        if (confirm) {
+            location.reload();
+        }
+
+    </script>
+</body>
+
+</html>
