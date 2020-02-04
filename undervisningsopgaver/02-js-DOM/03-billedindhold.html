@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        #content div:nth-child(1) {
+            height: 100px;
+            width: 100px;
+            background-color: green;
+            line-height: 100px;
+            text-align: center;
+        }
+
+        #content div:nth-child(2) {
+            height: 100px;
+            width: 100px;
+            background-color: red;
+            border-radius: 50%;
+            line-height: 100px;
+            text-align: center;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <section id="content">
+        <div></div>
+        <div></div>
+        <div></div>
+    </section>
+
+    <script>
+        const firstelement = document.querySelector("#content div:nth-child(1)");
+        const secondelement = document.querySelector("#content div:nth-child(2)");
+
+        firstelement.innerHTML = `<img src="billeder/frog.png">`;
+        secondelement.innerHTML = `<img src="billeder/pig.png">`;
+
+        console.log(firstelement);
+
+    </script>
+</body>
+
+</html>
