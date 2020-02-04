@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+
+    <section id="content">
+        <div><a href="https://kea.dk/">KEA Hjemmeside</a></div>
+        <div><a href="https://github.com/michelleaky/tema_07">Mit GitHub</a></div>
+        <div> <img src="billeder/frog.png"></div>
+    </section>
+
+    <script>
+        //En måde at få fat på diver uden at bruge id eller class, er "siblings". Her skriver man div, og så får man one. Hvis man skriver div + div + div får jeg Three.
+        //const element = document.querySelector("div + div");
+        //console.log(element);
+
+        //man kan også bruge en nth-child-selector.
+
+        const firstelement = document.querySelector("#content div:nth-child(1)");
+        const secondelement = document.querySelector("#content div:nth-child(2)");
+
+        firstelement.innerHTML = "<h1>Dette er første div</h1>";
+        secondelement.innerHTML = "<h1>Dette er andet div</h1>";
+
+        console.log(firstelement);
+        console.log(secondelement);
+
+    </script>
+</body>
+
+</html>
