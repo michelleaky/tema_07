@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        div {
+            background: blue;
+            height: 100px;
+            width: 100px;
+            margin: 1rem;
+            display: inline-block;
+        }
+
+        .red {
+            background-color: red;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="red"></div>
+    <div class="red"></div>
+    <div class="red"></div>
+    <div class=""></div>
+    <div class="red"></div>
+    <div class="red"></div>
+    <div class="red"></div>
+    <div class="red"></div>
+
+
+
+    <script>
+        const rødeKasser = document.querySelectorAll(".red");
+        console.log(rødeKasser)
+
+        //Vi vil gerne have at en kasse bliver blå når den klikkes på:
+        rødeKasser.forEach(kasse => {
+            kasse.addEventListener("click", blivBlå);
+            kasse.style.cursor = "pointer";
+        });
+        // Jeg har lavet tuborgklammer, så det bliver til en arrow-funktion. Hermed har jeg kunne indsætte css på cursoren.
+
+        //Funktionen blivBlå skal blive blå, så vi kan fjerne den røde. This er den der bliver klikket på.
+        function blivBlå() {
+            console.log(this);
+            this.classList.toggle("red");
+
+        }
+
+        //Hvis alle kasser skal kunne klikkes på, så ændrer man fra .red til bare div i qsrAll.
+
+    </script>
+</body>
+
+
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="UTF-8">
+    <title>t</title>
+</head>
+
+<body>
+
+
+    <script>
+        //Brug af array. Undervisere er navnet på variablen.
+        const undervisere = ["Kamilla", "Martin", "Klaus", "Migsæl", "Lau", "Mikkel"];
+        console.log(undervisere[1]);
+
+        //Hvis man kigger i consollen, kan man se hvor mange antal arrays der er og hvilket nr de forskellige har (kamilla er nr 0).
+        //Hvis man gerne vil bruge fx martin kan man bruge dot-notation. Her skriver man efter undervisere i console.log [1]. Så står der martin consolen.
+        //Hvis man skriver 4, så vil der stå undefined, og det er fordi der ikke er defineret et nr 4.
+
+
+        //forEach - for hver. Fx hver enkelte underviser. Husk undervisere er i flertal og underviser er i ental - den enkelte lærer. Hermed vil lærerne komme linje for linje i consolen, som om de står i en liste. Bemærk at der er kaldt på en anonym funktion. Så kan man ændre antallet og hvad man skriver under sin array, og forEach ændrer med det.
+        undervisere.forEach((underviser, index) => console.log(underviser, index))
+
+        //Man kan få elementerne og indexet ud. For at få indexet med, så skriver man ,index efter underviser.
+        //Hvis man kun skal have de første tre, kan man lave en if, hvor index < 3 fx. Man kan også finde ud af hvor mange, ved at skrive length.
+
+    </script>
+</body>
+
+</html>
