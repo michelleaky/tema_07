@@ -10,31 +10,54 @@
 
 <body>
 
-
+    <input type="test" id="length">
+    <input type="test" id="width">
+    <button id="knap">Beregn</button>
 
     <script>
-        let length = prompt("Angiv længde");
-        let width = prompt("Angiv bredde");
+        document.querySelector("#knap").addEventListener("click", klikKnap);
+
+        function klikKnap() {
+            //console.log("Knap klikket på");
 
 
-        function areal(l, w) {
-            let a = (l * w);
 
-            if (a == 0) {
-                return (`Husk længde og bredde skal være et tal. Prøv igen`);
-            } else if (isNaN(a)) {
-                return (`Fejl. Prøv igen med tal`);
+            let length = document.querySelector("#length").value;
+            let width = document.querySelector("#width").value;
+            let resultat;
+
+            if (isNaN(length) == true || isNaN(width) == true) {
+                resultat = "Den er gal"
             } else {
-                return (`Arealet er ${a}. Vil du prøve igen?`)
+                let resultat = length * width;
             }
+
+            console.log("Resultat", resultat);
+
         }
 
-        let resultalt = areal(length, width);
-        confirm(resultalt);
 
-        if (confirm) {
-            location.reload();
-        }
+
+        //let length = prompt("Angiv længde");
+        //let width = prompt("Angiv bredde");
+        //        function areal(l, w) {
+        //            let a = (l * w);
+        //
+        //            if (a == 0) {
+        //                return (`Husk længde og bredde skal være et tal. Prøv igen`);
+        //            } else if (isNaN(a)) {
+        //                return (`Fejl. Prøv igen med tal`);
+        //            } else {
+        //                return (`Arealet er ${a}. Vil du prøve igen?`)
+        //            }
+        //        }
+        //
+        //        let resultalt = areal(length, width);
+        //        confirm(resultalt);
+        //
+        //        if (confirm) {
+        //            location.reload();
+        //        }
 
     </script>
 </body>
