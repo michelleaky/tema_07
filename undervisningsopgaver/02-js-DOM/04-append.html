@@ -7,19 +7,19 @@
     <title></title>
     <style>
         #content div:nth-child(1) {
-            height: 100px;
-            width: 100px;
+            height: 200px;
+            width: 200px;
             background-color: green;
-            line-height: 100px;
+            line-height: 200px;
             text-align: center;
         }
 
         #content div:nth-child(2) {
-            height: 100px;
-            width: 100px;
+            height: 200px;
+            width: 200px;
             background-color: red;
             border-radius: 50%;
-            line-height: 100px;
+            line-height: 200px;
             text-align: center;
         }
 
@@ -37,14 +37,14 @@
     <script>
         const firstelement = document.querySelector("#content div:nth-child(1)");
         const secondelement = document.querySelector("#content div:nth-child(2)");
+        const thirdelement = document.querySelector("#content div:nth-child(2)");
 
-        firstelement.innerHTML = `<img src="billeder/frog.png">`;
-        secondelement.innerHTML = `<img src="billeder/pig.png">`;
+        firstelement.innerHTML = `<img src="billeder/frog.png" alt="frog">`;
+        secondelement.innerHTML = `<img src="billeder/pig.png" alt="pig">`;
+        //Husk += her, fordi ellers så overskriver foxen grisen.
+        thirdelement.innerHTML += `<img src="billeder/fox.png" alt="fox">`;
 
         console.log(firstelement);
-
-        let img = document.createElement("img");
-        img.src = "http://mabe-kea.dk/E19/pics/fox.png";
 
     </script>
 </body>
