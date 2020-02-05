@@ -4,18 +4,104 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz</title>
+    <title>Michelle Quiz</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <h1>Verdens-quizzen</h1>
+    <h1>Michelle Quiz</h1>
 
     <p id="question"></p>
-    <input <script>
+    <input type="text" id="answer">
+    <button>Tjek svar</button>
+    <p id="question_output"></p>
+    <p id="score"></p>
 
 
+    <script>
+        window.addEventListener("load", startQuiz);
+        document.querySelector("button").addEventListener("click", buttonClicked);
+
+        let point = 0;
+        let questionCounter = 1;
+        let answerInput = document.querySelector("#answer");
+        let quizOutput = document.querySelector("#question_output");
+
+        let question1 = "Hvad er 2 + 2?";
+        let question2 = "Hvornår er det modsatte af peber?";
+        let question3 = "Hvilke 3 farver er grundfarverne?";
+        let question4 = "Hvor mange maver har en ko?";
+        let question5 = "Hvor længe varer julen?";
+
+        function startQuiz() {
+            if (questionCounter == 1) {
+                document.querySelector("#question").innerHTML = question1;
+            } else if (questionCounter == 2) {
+                document.querySelector("#question").innerHTML = question2;
+            } else if (questionCounter == 3) {
+                document.querySelector("#question").innerHTML = question3;
+            } else if (questionCounter == 4) {
+                document.querySelector("#question").innerHTML = question4;
+            } else if (questionCounter == 5) {
+                document.querySelector("#question").innerHTML = question5;
+            }
+        }
+
+        function buttonClicked() {
+
+
+            if (questionCounter == 1) {
+                (answerInput.value == "4") {
+                    quizOutput.innerHTML = "Korrekt!";
+                    point++;
+                } else {
+                    quizOutput.innerHTML = "Fokert. Svaret er 4";
+                }
+            }
+
+            if (questionCounter == 2) {
+                (answerInput.value == "Salt" || answerInput.value == "salt") {
+                    quizOutput.innerHTML = "Korrekt!";
+                    point++;
+                } else {
+                    quizOutput.innerHTML = "Fokert :( Svaret er salt";
+                }
+            }
+
+            if (questionCounter == 3) {
+                (answerInput.value == "Blå, gul og rød" || answerInput.value == "Rød, gul og blå" || answerInput.value == "Gul, rød og blå" || answerInput.value == "Blå, rød og gul" || answerInput.value == "Rød, blå og gul" || answerInput.value == "Gul, rød og blå") {
+                    quizOutput.innerHTML = "Korrekt!";
+                    point++;
+                } else {
+                    quizOutput.innerHTML = "Fokert :( Svaret er rød, blå og gul";
+                }
+            }
+
+            if (questionCounter == 4) {
+                (answerInput.value == "4") {
+                    quizOutput.innerHTML = "Korrekt!";
+                    point++;
+                } else {
+                    quizOutput.innerHTML = "Fokert :( Svaret er 4";
+                }
+            }
+
+            if (questionCounter == 5) {
+                (answerInput.value == "Julen varer lige til Påske" || answerInput.value == "Lige til Påske" || answerInput.value == "Til Påske") {
+                    quizOutput.innerHTML = "Korrekt!"
+                    point++;
+                } else {
+                    quizOutput.innerHTML = "Fokert :( Svaret er, at julen varer lige til Påske";
+                }
+            }
+
+            document.querySelector("#question").innerHTML = "Der er ikke flere spørgsmål";
+            document.querySelector("#score").innerHTML = `Du fik ${point} point i denne quiz. Godt gået!`;
+        }
+        answerInput.value = "";
+        questionCounter++;
+        startQuiz();
 
     </script>
 </body>
