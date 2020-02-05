@@ -8,10 +8,11 @@
 
 <body>
 
-    <p>Gæt et tal mellem 0 og 20:</p>
-    <input type="test" id="guess">
-    <button></button>
-    <p id="quizOutput"></p>
+    <!--input type tekst skaber et tekst felt. Det har fået id'et guess, som bruges i scripten, når man skal skrive ind det tal som brugeren har gættet på.-->
+    <p>Hvilket tal tænker jeg på?</p>
+    <input type="text" id="guess">
+    <button>Tjek svar</button>
+    <p id="guess_output"></p>
 
     <script>
         window.addEventListener("load", randomTal);
@@ -23,29 +24,62 @@
             let guessOutput = document.querySelector("#guess_output");
             let guessCount = 0;
 
-            document.querySelector("button").addEventListener("click", klikKnap);
+            document.querySelector("button").addEventListener("click", buttonClicked);
             document.querySelector("button").removeEventListener("click", randomTal);
             document.querySelector("button").innerHTML = "Tjek svar";
-
+            //guessOutput.innerHTML = "";
             guess.value = "";
 
-            function klikKnap() {
+            function buttonClicked() {
                 guessCount++;
 
                 if (guess.value < tal) {
-                    quizOutput.innerHTML = `Dit svar er for lavt. Prøv igen`
-                } else if (quess.value > tal) {
-                    quizOutput.innerHTML = `Dit svar er for højt. Prøv igen`
-                } else if (quess.value == tal) {
-                    quizOutput.innerHTML = `Korrekt!`
-                    document.querySelector("button").innerHTML = "Spil igen?"
+                    console.log("for lavt");
+                    guessOutput.innerHTML = "Jeg tænker på et højere tal";
+                } else if (guess.value == tal) {
+                    console.log(`Du har gættet det rigtige tal på ${guessCount} forsøg!`);
+                    guessOutput.innerHTML = `Du har gættet det rigtige tal på ${guessCount} forsøg!`;
+
+                    document.querySelector("button").innerHTML = "spil igen?";
                     document.querySelector("button").addEventListener("click", randomTal);
+
+                } else if (guess.value > tal) {
+                    console.log("for højt");
+                    guessOutput.innerHTML = "Jeg tænker på et lavere tal";
                 }
             }
-
-
-
         }
+
+
+        // window.addEventListener("load", randomTal);
+
+        // function randomTal() {
+        // let tal = Math.floor(Math.random() * 20) + 0;
+        // let guess = document.querySelector("#guess");
+        // let guessOutput = document.querySelector("#guess_output");
+        // let guessCount = 0;
+        //
+        // document.querySelector("button").addEventListener("click", klikKnap);
+        // document.querySelector("button").removeEventListener("click", randomTal);
+        // document.querySelector("button").innerHTML = "Tjek svar";
+        //
+        // guess.value = "";
+        //
+        // function klikKnap() {
+        // guessCount++;
+        //
+        // if (guess.value < tal) { // quizOutput.innerHTML=`Dit svar er for lavt. Prøv igen` // } else if (quess.value> tal) {
+        // quizOutput.innerHTML = `Dit svar er for højt. Prøv igen`
+        // } else if (quess.value == tal) {
+        // quizOutput.innerHTML = `Korrekt!`
+        // document.querySelector("button").innerHTML = "Spil igen?"
+        // document.querySelector("button").addEventListener("click", randomTal);
+        // }
+        // }
+        //
+        //
+        //
+        // }
 
     </script>
 </body>
