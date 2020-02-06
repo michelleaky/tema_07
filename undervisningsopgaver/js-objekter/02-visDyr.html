@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="UTF-8">
+    <title>visdyr 02</title>
+</head>
+
+<body>
+
+
+    <article>
+
+    </article>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", start);
+
+        function start() {
+            let billedeGris = "http://mabe-kea.dk/E19/pics/pig.png";
+
+            const dyr = {
+                "navn": "Dyr: gris",
+                "type": "Type: pattedyr",
+                "levested": "Levested: svinefarme",
+                //"billede": billedeGris
+            };
+
+            let article = document.querySelector("article");
+            let dyrUdskrift = `Dyr: ${dyr.navn}, ${dyr.type}, ${dyr.levested} `;
+            article.textContent = dyrUdskrift;
+
+            document.querySelector("article").innerHTML += `<br><img src = ${billedeGris}>`;
+
+            //            const destination = document.querySelector("article");
+            //            const dyreNavn = `${dyr.navn} ${dyr.type} ${dyr.levested}`;
+            //
+            //            destination.querySelector("article").textContent = dyreNavn;
+
+        }
+
+    </script>
+</body>
+
+</html>

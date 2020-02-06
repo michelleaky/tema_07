@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="UTF-8">
+    <title>visalledyr 05</title>
+</head>
+
+<body>
+
+
+    <article>
+
+    </article>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", start);
+
+        const dyr = [{
+            "navn": "Dyr: gris",
+            "type": "Type: pattedyr",
+            "levested": "Levested: svinefarme",
+
+        }, {
+            "navn": "Dyr: frø",
+            "type": "Type: amfibie",
+            "levested": "Levested: sumper",
+
+        }, {
+            "navn": "Dyr: ræv",
+            "type": "Type: pattedyr",
+            "levested": "Levested: skove",
+
+        }, {
+            "navn": "Dyr: sild",
+            "type": "Type: fisk",
+            "levested": "Levested: vand",
+
+        }, {
+            "navn": "Dyr: krokodille",
+            "type": "Type: krybdyr",
+            "levested": "Levested: sumper",
+
+        }];
+
+
+        function start() {
+
+            const listeVisning = document.querySelector("article");
+            dyr.forEach(d => {
+                listeVisning.innerHTML += `<p>${d.navn} ${d.type} ${d.levested} </p>`
+            });
+        }
+
+    </script>
+</body>
+
+</html>
