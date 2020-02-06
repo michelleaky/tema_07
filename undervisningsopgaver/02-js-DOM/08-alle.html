@@ -44,11 +44,13 @@
 
         function start() {
 
-            //En array af alle dokumentets paragrafer
+            //En array af alle dokumentets paragrafer. Vi laver variablen alleP og alleH3 for at få fat i alle tags (queryselectorALL), som senere skal blive en en array vha. forEach. Når man bruger queryselectorall tager den alle elementer som opfylder p.
             let alleP = document.querySelectorAll("p");
             let alleH3 = document.querySelectorAll("h3");
 
+            // For hver enkelte p i listen alleP tilføjer vi...
             //For hver enkelt p tilføjer vi en klikfunktion, og når man klikker tilføjer den typo som klasse.
+            // Først er en array-funktion kaldt på, og derefter en anonym.
             alleP.forEach(p => {
                 p.addEventListener("click", () => {
                     p.classList.add("typo");

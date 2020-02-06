@@ -37,6 +37,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", start);
 
+        //Diverne er puttet i konstanter
         const firstelement = document.querySelector("#content div:nth-child(1)");
         const secondelement = document.querySelector("#content div:nth-child(2)");
 
@@ -44,12 +45,18 @@
         function start() {
             console.log("start");
 
+            //Jeg har sat bullederne ind i konstanterne. Billederne bliver sat ind i diverne vha. innerHTML.
             firstelement.innerHTML = `<img src="billeder/frog.png">`;
             secondelement.innerHTML = `<img src="billeder/pig.png">`;
 
+            //For at gøre noget aktivt har jeg tilføjet en eventlistener på billedet, som jeg har kaldt konstanten firstelement og secondelement.
             firstelement.addEventListener("click", flyt);
             secondelement.addEventListener("click", stop);
 
+
+            // ved let firkantStart har jeg lavet en ny variabel, for at tag fat i indholdet af firstelements indhold. Det gør jeg for, at lægge frøens indhold "til side" og gemmer udgangspunktet, så dens indhold kan bruges igen og igen, og ikke bare bliver overskrevet af grisens indhold.
+            // Metafor: Man har en kande med rødt vand og en kande med grønt vand. For at bytte kandernes indhold, er man nødt til at gemme noget af vende et tredje sted.
+            // For at bytte farver tager jeg de to konstanter og laver dem lig med hinandens indhold.
             function flyt() {
                 console.log("flyt kaldt på");
                 let firkantStart = firstelement.innerHTML;
@@ -57,6 +64,7 @@
                 secondelement.innerHTML = firkantStart;
             }
 
+            //For at skifte farve skal man "bare" skrive .style på elementet man vil style. Anførelsestegn "" gøre noget til en tekst-string.
             function stop() {
                 console.log("Flyt er stoppet");
                 firstelement.removeEventListener("click", flyt);

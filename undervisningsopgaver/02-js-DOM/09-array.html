@@ -30,18 +30,34 @@
 
 
     <script>
-        //Brug af array. Undervisere er navnet på variablen.
+        //Brug af array. Sange er navnet på variablen.
         let sange = ["Pluto Projector", "If I Believe You", "Cello Suite No. 1 in G Major", "Fresh Roses", "Freedom", "There Is a Light That Never Goes Out", "Bitter Fuck", "Ultralight Beam", "The Wisp Sings", "SLOW DANCING IN THE DARK"];
 
 
-        //Hvis man kigger i consollen, kan man se hvor mange antal arrays der er og hvilket nr de forskellige har (kamilla er nr 0).
-        //Hvis man gerne vil bruge fx martin kan man bruge dot-notation. Her skriver man efter undervisere i console.log [1]. Så står der martin consolen.
+        //Hvis man kigger i consollen, kan man se hvor mange antal arrays der er og hvilket nr de forskellige har (Pluto Projekter er nr 0).
+        //Hvis man gerne vil bruge fx Fresh Roses kan man bruge dot-notation. Her skriver man efter sange i console.log [1]. Så står der If i believe you i consolen.
         //Hvis man skriver 4, så vil der stå undefined, og det er fordi der ikke er defineret et nr 4.
 
 
-        //forEach - for hver. Fx hver enkelte underviser. Husk undervisere er i flertal og underviser er i ental - den enkelte lærer. Hermed vil lærerne komme linje for linje i consolen, som om de står i en liste. Bemærk at der er kaldt på en anonym funktion. Så kan man ændre antallet og hvad man skriver under sin array, og forEach ændrer med det.
+
+
+
+        //forEach - for hver. Vi bruger det som et loop. Fx hver enkelte sang. Husk sange er i flertal og sang er i ental - den enkelte sange. Hermed vil sangene komme linje for linje i consolen, som om de står i en liste. Bemærk at der er kaldt på en anonym funktion. Så kan man ændre antallet og hvad man skriver under sin array, og forEach ændrer med det. "sang" er en lille lokal variabel.
+        // "forEach sang i playlisten "sange" skal gøre noget.
         sange.forEach(sang => {
-            document.querySelector("#display").innerHTML += `${sang} <br>`;
+            //Her laver vi et liste-element.
+            let element = document.createElement("li");
+
+            //Indholdet lægges ind et minSang elementet.
+            let minSang = document.createTextNode(sang);
+
+            //Jeg tager fat i min unordered list, og smider det ind. appendChild = jeg tilføjer det jeg har lavet, til mit DOM.
+            element.appendChild(minSang);
+            document.querySelector("#display").appendChild(element);
+
+
+            //Nedenstående udskrevet er en måde at gøre det ovenstående på, men med innerHTML.
+            //document.querySelector("#display").innerHTML += `${sang} <br>`;
         })
 
 
