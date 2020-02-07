@@ -8,12 +8,18 @@
 
     <style>
         #liste {
-            border: 5px pink solid;
+            border: 5px #72b9ff solid;
             padding: 10px;
+            background-color: black;
+        }
+
+        h2,
+        p {
+            color: white;
         }
 
         img {
-            width: 100%;
+            width: 90%;
         }
 
         section {
@@ -36,6 +42,8 @@
             <img src="" alt="">
             <p class="alder">Alder: </p>
             <p class="religion">Religion: </p>
+            <p class="hobby">Hobby: </p>
+            <p class="kaeledyr">Kæledyr: </p>
         </article>
     </template>
 
@@ -68,6 +76,8 @@
                 klon.querySelector("img").src = person.gsx$billede.$t;
                 klon.querySelector(".alder").textContent += person.gsx$alder.$t;
                 klon.querySelector(".religion").textContent += person.gsx$religion.$t;
+                klon.querySelector(".hobby").textContent += person.gsx$hobby.$t;
+                klon.querySelector(".kaeledyr").textContent += person.gsx$kaeledyr.$t;
                 container.appendChild(klon);
             })
 
