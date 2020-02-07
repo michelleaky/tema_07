@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="UTF-8">
+    <title>json dyr</title>
+
+
+    <style>
+        #liste {
+            border: 5px pink solid;
+            padding: 10px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <section class="data-container"></section>
+    <template>
+        <article id="liste">
+            <h3></h3>
+            <img src="" alt="">
+            <p>Type: </p>
+            <p>Levested: </p>
+        </article>
+    </template>
+
+
+    <script>
+        // "globale" variabler som skal tilgås flere steder skriver man her, for at have overblikket. Den er vigtig at bruge.
+        let dyr = [];
+
+        //Start funktionen skal kaldes for at hente dataen. Det gør man, hvis nu man skal have flere ting klaret ved opstart af siden, fx knapper der virker og sådan.
+        document.addEventListener("DOMContentLoaded", start);
+
+        function start() {
+            hentJson();
+        }
+
+
+
+        //Data hentes i asynkron funktion med mulighed for ventepauser.
+        async function hentJson() {
+            // Hent filen og put data ind i en respone, når det er kommet
+            const response = await fetch("alleDyr.json");
+            //Data bliver jsonformateret og lagt i array
+            dyr = await response.json();
+            console.log(dyr);
+            //Indhold lægges i dom
+            visDyr();
+        }
+        //start
+        //hentDyrData
+        //visDyr
+
+
+        function visDyr() {
+            const container = document.querySelector(".data-container");
+            const dyreTemplate = document.querySelector("template");
+
+            //løb listen igennem og indsæt data i en template. Husk at benytte d - den enkelte - og ikke dyr som i dem alle.
+            dyr.forEach(d => {
+                let klon = dyreTemplate.cloneNode(true).content;
+                klon.querySelector("h3").textContent = d.navn;
+                klon.querySelector("img").src = d.billede;
+                klon.querySelector("p").textContent += d.type;
+                klon.querySelector("p:last-child").textContent += d.levested;
+                container.appendChild(klon);
+            })
+        }
+
+    </script>
+</body>
+
+</html>

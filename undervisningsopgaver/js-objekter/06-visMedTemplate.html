@@ -31,6 +31,8 @@
     <script>
         document.addEventListener("DOMContentLoaded", start);
 
+
+        // Man kan teste om man har testet nedenstående forkert, da json kan fungere som en validator. Fx hvis man mangler gåseøjne vil der ikke vises fejl i scriptet, men json kan se fejlen.
         let dyr = [{
                 "navn": "Gris",
                 "type": "Pattefyr",
@@ -65,6 +67,8 @@
         function start() {
             const container = document.querySelector(".data-container");
             const dyreTemplate = document.querySelector("template");
+
+            //løb listen igennem og indsæt data i en template. Husk at benytte d - den enkelte - og ikke dyr som i dem alle.
 
             dyr.forEach(d => {
                 let klon = dyreTemplate.cloneNode(true).content;
