@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Personliste</title>
+    <title>Personliste knapper</title>
 
 
     <style>
@@ -35,6 +35,12 @@
 
 <body>
 
+    <header>
+        <button class="filter valgt" data-køn="alle">Alle</button>
+        <button class="filter" data-køn="m">Mænd</button>
+        <button class="filter " data-køn="k">Kvinder</button>
+    </header>
+
     <section class="data-container"></section>
     <template>
         <article id="liste">
@@ -51,6 +57,7 @@
 
     <script>
         let personer = [];
+        let filter = "k";
         const endpoint = "https://spreadsheets.google.com/feeds/list/1XWWbfWszD7f4jHqp51V_oT3pkHuR-ceEUw4YtrvK7F0/od6/public/values?alt=json";
 
         document.addEventListener("DOMContentLoaded", start);
@@ -71,16 +78,16 @@
             const personTemplate = document.querySelector("template");
 
             personer.feed.entry.forEach(person => {
-
-                let klon = personTemplate.cloneNode(true).content;
-                klon.querySelector("h2").textContent = person.gsx$navn.$t;
-                klon.querySelector("img").src = person.gsx$billede.$t;
-                klon.querySelector(".alder").textContent += person.gsx$alder.$t;
-                klon.querySelector(".religion").textContent += person.gsx$religion.$t;
-                klon.querySelector(".hobby").textContent += person.gsx$hobby.$t;
-                klon.querySelector(".kaeledyr").textContent += person.gsx$kaeledyr.$t;
-                container.appendChild(klon);
-
+                if (person.gsx$sex.$t == filter) {
+                    let klon = personTemplate.cloneNode(true).content;
+                    klon.querySelector("h2").textContent = person.gsx$navn.$t;
+                    klon.querySelector("img").src = person.gsx$billede.$t;
+                    klon.querySelector(".alder").textContent += person.gsx$alder.$t;
+                    klon.querySelector(".religion").textContent += person.gsx$religion.$t;
+                    klon.querySelector(".hobby").textContent += person.gsx$hobby.$t;
+                    klon.querySelector(".kaeledyr").textContent += person.gsx$kaeledyr.$t;
+                    container.appendChild(klon);
+                }
             })
 
         }
