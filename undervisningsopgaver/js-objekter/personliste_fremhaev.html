@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Personliste knapper</title>
+    <title>Personliste mere knapper</title>
 
 
     <style>
@@ -44,7 +44,7 @@
         }
 
         .valgt {
-            background-color: red;
+            background-color: gainsboro;
         }
 
         button:hover {
@@ -53,16 +53,15 @@
         }
 
         h1 {
-
             text-align: center;
         }
+
     </style>
 </head>
 
 <body>
     <h1>Alle</h1>
     <nav>
-
         <button class="filter valgt" data-køn="alle">Alle</button>
         <button class="filter" data-køn="m">Mænd</button>
         <button class="filter" data-køn="k">Kvinder</button>
@@ -132,9 +131,22 @@
         }
 
         function filtrering() {
-            console.log("Filter");
+            console.log("this", this);
             filter = this.dataset.køn;
+
             visPersoner();
+
+            document.querySelector("h1").textContent = this.textContent;
+
+            //classen valgt bliver fjernet så knapperne ikke bliver røde.
+            document.querySelectorAll(".valgt").forEach(elm => {
+                elm.classList.remove("valgt");
+            })
+            //Vi får fat i den enkelte knap via this og tilføjer classen
+            this.classList.add("valgt");
         }
+
     </script>
-</body></html>
+</body>
+
+</html>
