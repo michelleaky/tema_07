@@ -8,14 +8,14 @@
 
     <style>
         #liste {
-            border: 5px #72b9ff solid;
+            border: 1px black solid;
             padding: 10px;
-            background-color: black;
+            background-color: white;
         }
 
         h2,
         p {
-            color: #72b9ff;
+            color: black;
         }
 
         img {
@@ -58,11 +58,20 @@
 
         #detalje {
             position: fixed;
-            top: 0;
             width: 100vw;
             height: 100vh;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 10;
+            top: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, .8);
+            overflow: scroll;
+        }
+
+        #detalje .person {
+            width: 60vw;
+            min-height: 50vh;
+            margin: auto;
+            padding: 4rem;
+            background: white;
         }
 
         #detalje button {
@@ -88,11 +97,12 @@
 
     <nav>
         <button class="filter valgt" data-køn="alle">Alle</button>
-        <button class="filter" data-køn="m">Mænd</button>
-        <button class="filter" data-køn="k">Kvinder</button>
-        <button class="filter" data-køn="andet">Andet</button>
+        <button class="filter" data-køn="foretter">Foretter</button>
+        <button class="filter" data-køn="hovedretter">Hovedretter</button>
+        <button class="filter" data-køn="desserter">Desserter</button>
+        <button class="filter" data-køn="sideorders">Sides</button>
+        <button class="filter" data-køn="drikkevarer">Drikkevarer</button>
 
-        <button class="aldersFilterBTN" data-alder_over="55">Vis dem over 55</button>
     </nav>
 
     <section class="data-container"></section>
@@ -102,21 +112,20 @@
         <article id="liste">
             <h2></h2>
             <img src="" alt="">
-            <p class="alder">Alder: </p>
-            <p class="religion">Religion: </p>
-            <p class="hobby">Hobby: </p>
-            <p class="kaeledyr">Kæledyr: </p>
-            <p class="sex">Køn: </p>
+            <p></p>
+            <p>Pris: </p>
+
         </article>
     </template>
 
 
     <section id="detalje" class="skjul">
         <article id="person">
-            <button>X</button>
-            <h1>NAVN</h1>
+            <button>x</button>
+            <h1></h1>
             <img src="">
-            <p>RELIGION</p>
+            <p class="lang"></p>
+            <p class="pris">pris: </p>
         </article>
     </section>
 
@@ -126,9 +135,10 @@
         let personer = [];
         let filter = "alle";
         const container = document.querySelector(".data-container");
-        const endpoint = "https://spreadsheets.google.com/feeds/list/1XWWbfWszD7f4jHqp51V_oT3pkHuR-ceEUw4YtrvK7F0/od6/public/values?alt=json";
+        const endpoint = "https://spreadsheets.google.com/feeds/list/17Dd7DvkPaFamNUdUKlrFgnH6POvBJXac7qyiS6zNRw0/od6/public/values?alt=json&fbclid=IwAR0M67ELOMZcVoeckxpntVgttj8qqbsjMhRHDE8gicCVhK0uN_CxxQFecoA";
         let køn = "k";
         let filterAlder = 55;
+        const detalje = document.querySelector("#detalje");
 
 
 
@@ -151,71 +161,40 @@
             container.innerHTML = "";
             const personTemplate = document.querySelector("template");
 
-            console.log(personer);
+
 
             personer.feed.entry.forEach(person => {
-                if ((filter == "alle" || filter == person.gsx$sex.$t) && (filterAlder < person.gsx$alder.$t)) {
+                console.log(person);
+                if (filter == "alle" || filter == person.gsx$kategori.$t) {
                     let klon = personTemplate.cloneNode(true).content;
                     klon.querySelector("h2").textContent = person.gsx$navn.$t;
-                    klon.querySelector("img").src = person.gsx$billede.$t;
-                    klon.querySelector(".alder").textContent += person.gsx$alder.$t;
-                    klon.querySelector(".religion").textContent += person.gsx$religion.$t;
-                    klon.querySelector(".hobby").textContent += person.gsx$hobby.$t;
-                    klon.querySelector(".kaeledyr").textContent += person.gsx$kaeledyr.$t;
-                    klon.querySelector(".sex").textContent += person.gsx$sex.$t;
+                    klon.querySelector("p").textContent = person.gsx$kort.$t;
+                    klon.querySelector("p+p").innerHTML += person.gsx$pris.$t;
 
-
-
-
+                    klon.querySelector("#liste").addEventListener("click", function() {
+                        visDetalje(person)
+                    });
 
                     //Føjet singeview:
                     //klon.querySelector(".navn").textContent = person.gsx$id.$t + "" + person.gsx$navn.$t;
-
-
                     container.appendChild(klon);
-                    addEventListenerstoButtons();
                 }
             })
-
         }
 
 
-
-
-
-        function addEventListenerstoButtons() {
-            document.querySelectorAll(".filter").forEach(elm => {
-                elm.addEventListener("click", filtrering);
-            })
-            document.querySelector(".aldersFilterBTN").addEventListener("click", aldersFiltrering);
+        function visDetalje(person) {
+            console.log(person);
+            console.log(person.gsx$navn.$t);
+            detalje.classList.remove("skjul");
+            detalje.querySelector("button").addEventListener("click", skjulDetalje)
+            detalje.querySelector("h1").textContent = person.gsx$navn.$t;
+            detalje.querySelector(".lang").textContent = person.gsx$lang.$t;
+            detalje.querySelector(".pris").textContent = person.gsx$pris.$t;
         }
 
-        function filtrering() {
-            console.log("this", this);
-            filter = this.dataset.køn;
-
-            visPersoner();
-
-            document.querySelector("h1").textContent = this.textContent;
-
-            //classen valgt bliver fjernet så knapperne ikke bliver røde.
-            document.querySelectorAll(".valgt").forEach(elm => {
-                elm.classList.remove("valgt");
-            })
-            //Vi får fat i den enkelte knap via this og tilføjer classen
-            this.classList.add("valgt");
-        }
-
-        function aldersFiltrering() {
-            if (filterAlder == 0) {
-                filterAlder = 55;
-                filterAlder = parseInt(this.dataset.alder_over);
-                this.classList.add("valgt");
-            } else {
-                filterAlder = 0;
-                this.classList.remove("valgt");
-            }
-            visPersoner();
+        function skjulDetalje() {
+            detalje.classList.add("skjul");
         }
 
     </script>

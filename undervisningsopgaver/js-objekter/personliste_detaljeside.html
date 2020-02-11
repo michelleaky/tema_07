@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Alder</title>
+
+
+    <style>
+        h2,
+        p {
+            color: #72b9ff;
+        }
+
+        img {
+            width: 90%;
+        }
+
+
+
+
+        button {
+            color: white;
+            background-color: black;
+            margin: 10px 5px 40px 5px;
+            padding: 10px;
+        }
+
+        button:hover {
+            background-color: gainsboro;
+            color: black;
+        }
+
+        #detalje {
+            position: fixed;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 10;
+        }
+
+        #detalje button {
+            font-size: 2em;
+        }
+
+        #person {
+            margin: 3em;
+            padding: 2em;
+            background-color: white;
+        }
+
+        .skjul {
+            display: none;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <section id="detalje" class="skjul">
+        <article id="person">
+            <button>X</button>
+            <h1>NAVN</h1>
+            <img src="">
+            <p>RELIGION</p>
+        </article>
+    </section>
+
+
+    <script>
+        let personer = [];
+        const endpoint = "https://spreadsheets.google.com/feeds/list/1XWWbfWszD7f4jHqp51V_oT3pkHuR-ceEUw4YtrvK7F0/od6/public/values?alt=json";
+        const detalje = document.querySelector("#detalje");
+
+
+
+        document.addEventListener("DOMContentLoaded", start);
+
+        function start() {
+            loadData();
+        }
+
+        async function loadData() {
+            const response = await fetch(endpoint);
+            personer = await response.json();
+            console.log(personer);
+            visPersoner();
+
+
+        }
+
+        function visPersoner() {
+            const personTemplate = document.querySelector("detalje");
+
+            personer.feed.entry.forEach(person => {
+                console.log(person);
+
+                if (person) {
+                    detalje.classList.remove("skjul");
+                    detalje.querySelector("button").addEventListener("click", () => detalje.classList.add("skjul"));
+                    console.log(person.gsx$navn.$t);
+                    detalje.querySelector("h1").textContent = person.gsx$navn.$t;
+                    detalje.querySelector("p").textContent = person.gsx$religion.$t;
+                    detalje.querySelector("img").src = person.gsx$billede.$t;
+                    detalje.querySelector("img").alt = person.gsx$navn.$t + person.gsx$efternavn.$t;
+
+                }
+            });
+        }
+
+        //Føjet singeview:
+        //klon.querySelector(".navn").textContent = person.gsx$id.$t + "" + person.gsx$navn.$t;
+        container.appendChild(klon);
+        addEventListenerstoButtons();
+
+
+
+        function visDetalje(person) {
+            console.log(person);
+            console.log(person.gsx$navn.$t);
+            detalje.classList.remove("skjul");
+            detalje.querySelector("button").addEventListener("click", skjulDetalje)
+            detalje.querySelector("h1").textContent = person.gsx$navn.$t + person.gsx$efternavn.$t;
+            detalje.querySelector("p").textContent = person.gsx$religion.$t;
+            detalje.querySelector("img").src = person.gsx$billede.$t;
+        }
+
+        function skjulDetalje() {
+            detalje.classList.add("skjul");
+        }
+
+
+        function addEventListenerstoButtons() {
+            document.querySelectorAll(".filter").forEach(elm => {
+                elm.addEventListener("click", filtrering);
+            })
+            document.querySelector(".aldersFilterBTN").addEventListener("click", aldersFiltrering);
+        }
+
+    </script>
+
+</body>
+
+</html>

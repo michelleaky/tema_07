@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Bistro Babushka</title>
+
+
+    <style>
+        #liste {
+            border: 5px #72b9ff solid;
+            padding: 10px;
+            background-color: black;
+        }
+
+        h2,
+        p {
+            color: white;
+        }
+
+        img {
+            width: 90%;
+        }
+
+        section {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            max-width: 1000px;
+            margin: 0 auto;
+            grid-gap: 30px;
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        button {
+            color: white;
+            background-color: black;
+            margin: 10px 5px 40px 5px;
+            padding: 10px;
+        }
+
+        .valgt {
+            background-color: gainsboro;
+        }
+
+        button:hover {
+            background-color: gainsboro;
+            color: black;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+    </style>
+</head>
+
+<body>
+    <h1>Alle</h1>
+    <nav>
+        <button class="filter valgt" data-køn="alle">Alle</button>
+        <button class="filter" data-køn="foretter">Hovedretter</button>
+        <button class="filter" data-køn="desserter">Desserter</button>
+    </nav>
+
+    <section class="data-container"></section>
+    <template>
+        <article id="liste">
+            <h2></h2>
+            <img src="" alt="">
+            <p class="beskrivelse"></p>
+            <p class="pris">Pris: </p>
+        </article>
+    </template>
+
+
+
+    <script>
+        let retter = [];
+        let filter = "alle";
+        const container = document.querySelector(".data-container");
+        const endpoint = "https://spreadsheets.google.com/feeds/list/1QSO_LnJ9SIIGt4LNh9bYcDPyVoDpja6CflSQlW2MS6c/od6/public/values? alt=json&2PACX-1vSbbL-gumI80_N2fE__7xA-oddUXKSkHvdN2RTdbm8pJ9Bmbn-ImqqjVX97sDlGbV1p7Yot6JcJE3yj";
+
+        document.addEventListener("DOMContentLoaded", start);
+
+        function start() {
+            loadData();
+        }
+
+        async function loadData() {
+            const response = await fetch(endpoint);
+            retter = await response.json();
+            console.log(retter);
+            visPersoner();
+        }
+
+        function visPersoner() {
+            container.innerHTML = "";
+            const personTemplate = document.querySelector("template");
+
+            retter.feed.entry.forEach(ret => {
+                if (filter == "alle" || filter == ret.gsx$sex.$t) {
+                    let klon = personTemplate.cloneNode(true).content;
+                    klon.querySelector("h2").textContent = ret.gsx$navn.$t;
+                    klon.querySelector(".beskrivelse").textContent = ret.gsx$kort.$t;
+
+                    container.appendChild(klon);
+                    addEventListenerstoButtons();
+                }
+            })
+
+        }
+
+        function addEventListenerstoButtons() {
+            document.querySelectorAll(".filter").forEach(elm => {
+                elm.addEventListener("click", filtrering);
+            })
+        }
+
+        function filtrering() {
+            console.log("this", this);
+            filter = this.dataset.køn;
+
+            visPersoner();
+
+            document.querySelector("h1").textContent = this.textContent;
+
+            //classen valgt bliver fjernet så knapperne ikke bliver røde.
+            document.querySelectorAll(".valgt").forEach(elm => {
+                elm.classList.remove("valgt");
+            })
+            //Vi får fat i den enkelte knap via this og tilføjer classen
+            this.classList.add("valgt");
+        }
+
+
+
+
+
+
+        //Få billeder ind:
+        //klon.querySelector("img").src = "images/small/" + ret.gsxbillede.$t + "-sm.jpg";
+        //
+
+    </script>
+</body>
+
+</html>

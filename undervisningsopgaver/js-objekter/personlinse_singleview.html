@@ -129,6 +129,7 @@
         const endpoint = "https://spreadsheets.google.com/feeds/list/1XWWbfWszD7f4jHqp51V_oT3pkHuR-ceEUw4YtrvK7F0/od6/public/values?alt=json";
         let køn = "k";
         let filterAlder = 55;
+        const detalje = document.querySelector("#detalje");
 
 
 
@@ -151,9 +152,10 @@
             container.innerHTML = "";
             const personTemplate = document.querySelector("template");
 
-            console.log(personer);
+
 
             personer.feed.entry.forEach(person => {
+                console.log(person);
                 if ((filter == "alle" || filter == person.gsx$sex.$t) && (filterAlder < person.gsx$alder.$t)) {
                     let klon = personTemplate.cloneNode(true).content;
                     klon.querySelector("h2").textContent = person.gsx$navn.$t;
@@ -164,20 +166,37 @@
                     klon.querySelector(".kaeledyr").textContent += person.gsx$kaeledyr.$t;
                     klon.querySelector(".sex").textContent += person.gsx$sex.$t;
 
-
-
-
+                    klon.querySelector("#liste").addEventListener("click", function() {
+                        visDetalje(person)
+                    });
 
                     //Føjet singeview:
                     //klon.querySelector(".navn").textContent = person.gsx$id.$t + "" + person.gsx$navn.$t;
-
-
                     container.appendChild(klon);
                     addEventListenerstoButtons();
                 }
             })
-
         }
+
+
+
+
+
+
+        function visDetalje(person) {
+            console.log(person);
+            console.log(person.gsx$navn.$t);
+            detalje.classList.remove("skjul");
+            detalje.querySelector("button").addEventListener("click", skjulDetalje)
+            detalje.querySelector("h1").textContent = person.gsx$navn.$t + person.gsx$efternavn.$t;
+            detalje.querySelector("p").textContent = person.gsx$religion.$t;
+            detalje.querySelector("img").src = person.gsx$billede.$t;
+        }
+
+        function skjulDetalje() {
+            detalje.classList.add("skjul");
+        }
+
 
 
 

@@ -56,29 +56,6 @@
             text-align: center;
         }
 
-        #detalje {
-            position: fixed;
-            top: 0;
-            width: 100vw;
-            height: 100vh;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 10;
-        }
-
-        #detalje button {
-            font-size: 2em;
-        }
-
-        #person {
-            margin: 3em;
-            padding: 2em;
-            background-color: white;
-        }
-
-        .skjul {
-            display: none;
-        }
-
     </style>
 </head>
 
@@ -111,15 +88,6 @@
     </template>
 
 
-    <section id="detalje" class="skjul">
-        <article id="person">
-            <button>X</button>
-            <h1>NAVN</h1>
-            <img src="">
-            <p>RELIGION</p>
-        </article>
-    </section>
-
 
 
     <script>
@@ -129,6 +97,7 @@
         const endpoint = "https://spreadsheets.google.com/feeds/list/1XWWbfWszD7f4jHqp51V_oT3pkHuR-ceEUw4YtrvK7F0/od6/public/values?alt=json";
         let køn = "k";
         let filterAlder = 55;
+
 
 
 
@@ -151,9 +120,10 @@
             container.innerHTML = "";
             const personTemplate = document.querySelector("template");
 
-            console.log(personer);
+
 
             personer.feed.entry.forEach(person => {
+                console.log(person);
                 if ((filter == "alle" || filter == person.gsx$sex.$t) && (filterAlder < person.gsx$alder.$t)) {
                     let klon = personTemplate.cloneNode(true).content;
                     klon.querySelector("h2").textContent = person.gsx$navn.$t;
@@ -164,20 +134,20 @@
                     klon.querySelector(".kaeledyr").textContent += person.gsx$kaeledyr.$t;
                     klon.querySelector(".sex").textContent += person.gsx$sex.$t;
 
-
-
-
-
-                    //Føjet singeview:
-                    //klon.querySelector(".navn").textContent = person.gsx$id.$t + "" + person.gsx$navn.$t;
+                    klon.querySelector("#liste").addEventListener("click", function() {
+                        location.href = "personliste_detaljeside2.html?id=" + person.gsx$id.$t;
+                    });
 
 
                     container.appendChild(klon);
                     addEventListenerstoButtons();
                 }
             })
-
         }
+
+
+
+
 
 
 
