@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Alder</title>
+    <title>Bistro Babushka</title>
 
 
     <style>
@@ -67,7 +67,7 @@
         }
 
         #detalje .person {
-            width: 60vw;
+            width: 100vw;
             min-height: 50vh;
             margin: auto;
             padding: 4rem;
@@ -82,6 +82,7 @@
             margin: 3em;
             padding: 2em;
             background-color: white;
+            width: 100vw;
         }
 
         .skjul {
@@ -96,8 +97,8 @@
 
 
     <nav>
-        <button class="filter valgt" data-køn="alle">Alle</button>
-        <button class="filter" data-køn="foretter">Foretter</button>
+        <button class="filter valgt" data-køn="alle">Alle retter</button>
+        <button class="filter" data-køn="forretter">Foretter</button>
         <button class="filter" data-køn="hovedretter">Hovedretter</button>
         <button class="filter" data-køn="desserter">Desserter</button>
         <button class="filter" data-køn="sideorders">Sides</button>
@@ -136,8 +137,7 @@
         let filter = "alle";
         const container = document.querySelector(".data-container");
         const endpoint = "https://spreadsheets.google.com/feeds/list/17Dd7DvkPaFamNUdUKlrFgnH6POvBJXac7qyiS6zNRw0/od6/public/values?alt=json&fbclid=IwAR0M67ELOMZcVoeckxpntVgttj8qqbsjMhRHDE8gicCVhK0uN_CxxQFecoA";
-        let køn = "k";
-        let filterAlder = 55;
+        let ret = "alle";
         const detalje = document.querySelector("#detalje");
 
 
@@ -168,6 +168,7 @@
                 if (filter == "alle" || filter == person.gsx$kategori.$t) {
                     let klon = personTemplate.cloneNode(true).content;
                     klon.querySelector("h2").textContent = person.gsx$navn.$t;
+                    klon.querySelector("img").src = `imgs/small/${person.gsx$billede.$t}-sm.jpg`;
                     klon.querySelector("p").textContent = person.gsx$kort.$t;
                     klon.querySelector("p+p").innerHTML += person.gsx$pris.$t;
 
@@ -178,10 +179,10 @@
                     //Føjet singeview:
                     //klon.querySelector(".navn").textContent = person.gsx$id.$t + "" + person.gsx$navn.$t;
                     container.appendChild(klon);
+                    addEventListenerstoButtons();
                 }
             })
         }
-
 
         function visDetalje(person) {
             console.log(person);
@@ -189,12 +190,37 @@
             detalje.classList.remove("skjul");
             detalje.querySelector("button").addEventListener("click", skjulDetalje)
             detalje.querySelector("h1").textContent = person.gsx$navn.$t;
+
+            detalje.querySelector("img").src = `imgs/large/${person.gsx$billede.$t}.jpg`;
             detalje.querySelector(".lang").textContent = person.gsx$lang.$t;
             detalje.querySelector(".pris").textContent = person.gsx$pris.$t;
         }
 
         function skjulDetalje() {
             detalje.classList.add("skjul");
+        }
+
+
+        function addEventListenerstoButtons() {
+            document.querySelectorAll(".filter").forEach(elm => {
+                elm.addEventListener("click", filtrering);
+            })
+        }
+
+        function filtrering() {
+            console.log("this", this);
+            filter = this.dataset.køn;
+
+            visPersoner();
+
+            document.querySelector("h1").textContent = this.textContent;
+
+            //classen valgt bliver fjernet så knapperne ikke bliver røde.
+            document.querySelectorAll(".valgt").forEach(elm => {
+                elm.classList.remove("valgt");
+            })
+            //Vi får fat i den enkelte knap via this og tilføjer classen
+            this.classList.add("valgt");
         }
 
     </script>
