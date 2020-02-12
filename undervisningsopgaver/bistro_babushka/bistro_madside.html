@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Bistro sepereat</title>
+
+
+    <style>
+        #liste {
+            border: 5px #72b9ff solid;
+            padding: 10px;
+            background-color: black;
+        }
+
+        h2,
+        p {
+            color: #72b9ff;
+        }
+
+        img {
+            width: 90%;
+        }
+
+        section {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            max-width: 1000px;
+            margin: 0 auto;
+            grid-gap: 30px;
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        button {
+            color: white;
+            background-color: black;
+            margin: 10px 5px 40px 5px;
+            padding: 10px;
+        }
+
+        .valgt {
+            background-color: gainsboro;
+        }
+
+        button:hover {
+            background-color: gainsboro;
+            color: black;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+    </style>
+</head>
+
+<body>
+    <h1>Alle</h1>
+
+
+    <nav>
+        <button class="filter valgt" data-køn="alle">Alle retter</button>
+        <button class="filter" data-køn="forretter">Foretter</button>
+        <button class="filter" data-køn="hovedretter">Hovedretter</button>
+        <button class="filter" data-køn="desserter">Desserter</button>
+        <button class="filter" data-køn="sideorders">Sides</button>
+        <button class="filter" data-køn="drikkevarer">Drikkevarer</button>
+    </nav>
+
+    <section class="data-container"></section>
+
+    <template>
+
+        <article id="liste">
+            <h2></h2>
+            <img src="" alt="">
+            <p></p>
+            <p>Pris: </p>
+
+        </article>
+    </template>
+
+
+    <script>
+        let personer = [];
+        let filter = "alle";
+        const container = document.querySelector(".data-container");
+        const endpoint = "https://spreadsheets.google.com/feeds/list/17Dd7DvkPaFamNUdUKlrFgnH6POvBJXac7qyiS6zNRw0/od6/public/values?alt=json&fbclid=IwAR0M67ELOMZcVoeckxpntVgttj8qqbsjMhRHDE8gicCVhK0uN_CxxQFecoA";
+        let ret = "alle";
+
+
+
+
+
+        document.addEventListener("DOMContentLoaded", start);
+
+        function start() {
+            loadData();
+        }
+
+        async function loadData() {
+            const response = await fetch(endpoint);
+            personer = await response.json();
+            console.log(personer);
+            visPersoner();
+
+
+        }
+
+        function visPersoner() {
+            container.innerHTML = "";
+            const personTemplate = document.querySelector("template");
+
+
+
+            personer.feed.entry.forEach(person => {
+                console.log(person);
+                if (filter == "alle" || filter == person.gsx$kategori.$t) {
+                    let klon = personTemplate.cloneNode(true).content;
+                    klon.querySelector("h2").textContent = person.gsx$navn.$t;
+                    klon.querySelector("img").src = `imgs/small/${person.gsx$billede.$t}-sm.jpg`;
+                    klon.querySelector("p").textContent = person.gsx$kort.$t;
+                    klon.querySelector("p+p").innerHTML += person.gsx$pris.$t;
+
+
+                    klon.querySelector("#liste").addEventListener("click", function() {
+                        location.href = "bistro_detaljeside.html?id=" + person.gsx$id.$t;
+                    });
+
+                    container.appendChild(klon);
+                    addEventListenerstoButtons();
+                }
+            })
+        }
+
+
+
+
+
+        function addEventListenerstoButtons() {
+            document.querySelectorAll(".filter").forEach(elm => {
+                elm.addEventListener("click", filtrering);
+            })
+        }
+
+
+        function filtrering() {
+            console.log("this", this);
+            filter = this.dataset.køn;
+
+            visPersoner();
+
+            document.querySelector("h2").textContent = this.textContent;
+
+            //classen valgt bliver fjernet så knapperne ikke bliver røde.
+            document.querySelectorAll(".valgt").forEach(elm => {
+                elm.classList.remove("valgt");
+            })
+            //Vi får fat i den enkelte knap via this og tilføjer classen
+            this.classList.add("valgt");
+        }
+
+    </script>
+</body>
+
+</html>
