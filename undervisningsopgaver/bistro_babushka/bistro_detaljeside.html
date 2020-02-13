@@ -5,6 +5,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalje Mad</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Russo+One&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Lobster&display=swap" rel="stylesheet">
     <style>
         img {
             width: 100%;
@@ -13,6 +17,7 @@
         #detalje {
             position: fixed;
             top: 0;
+            left: 0;
             width: 100vw;
             height: 100vh;
             background-color: rgba(0, 0, 0, 0.5);
@@ -22,12 +27,23 @@
 
         #detalje button {
             font-size: 2em;
+
         }
 
         #person {
-            margin: 3em;
-            padding: 2em;
-            background-color: white;
+            margin: 5em;
+            padding: 4em;
+            background-color: #FEF7E3;
+        }
+
+        h1 {
+            font-size: 3em;
+            font-family: 'Lobster', cursive;
+        }
+
+        p {
+
+            font-family: 'Russo One', sans-serif;
         }
 
     </style>
@@ -76,6 +92,7 @@
             detalje.querySelector("button").addEventListener("click", goBack);
             personer.feed.entry.forEach(person => {
                 console.log(person);
+                //Det som sker i if sætningen er, at det id fra json skal sammenlignes med den id vi definerede i toppen.
                 if (person.gsx$id.$t == id) {
                     detalje.querySelector("h1").textContent = person.gsx$navn.$t;
 

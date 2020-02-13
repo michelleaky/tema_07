@@ -4,28 +4,52 @@
 <head>
     <meta charset="UTF-8">
     <title>Bistro Babushka</title>
+    <link href="https://fonts.googleapis.com/css?family=Russo+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lobster&display=swap" rel="stylesheet">
 
 
     <style>
+        body {
+            background-color: #FEF7E3;
+        }
+
+        .logo h2 {
+            font-family: 'Lobster', cursive;
+            font-size: 5em;
+            text-align: center;
+        }
+
+        .logo {
+
+            background-image: url(Artboard%201.svg);
+
+        }
+
+        h1 {
+            font-family: 'Russo One', sans-serif;
+            text-transform: uppercase;
+        }
+
         #liste {
             border: 1px black solid;
-            padding: 10px;
+            padding: 20px;
+            margin: 30px;
             background-color: white;
         }
 
         h2,
         p {
             color: black;
+            font-family: 'Russo One', sans-serif;
         }
 
         img {
-            width: 90%;
+            width: 100%;
         }
 
         section {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            max-width: 1000px;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
             margin: 0 auto;
             grid-gap: 30px;
         }
@@ -41,15 +65,22 @@
             background-color: black;
             margin: 10px 5px 40px 5px;
             padding: 10px;
+            font-family: 'Russo One', sans-serif;
+            letter-spacing: 1px;
         }
 
         .valgt {
-            background-color: gainsboro;
+            background-color: red;
+            font-family: 'Russo One', sans-serif;
+            letter-spacing: 1px;
         }
 
         button:hover {
-            background-color: gainsboro;
-            color: black;
+            background-color: red;
+            color: white;
+            text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+            font-family: 'Russo One', sans-serif;
+            letter-spacing: 1px;
         }
 
         h1 {
@@ -64,6 +95,7 @@
             left: 0;
             background-color: rgba(0, 0, 0, .8);
             overflow: scroll;
+
         }
 
         #detalje .person {
@@ -71,7 +103,7 @@
             min-height: 50vh;
             margin: auto;
             padding: 4rem;
-            background: white;
+            background: #FEF7E3;
         }
 
         #detalje button {
@@ -81,8 +113,8 @@
         #person {
             margin: 3em;
             padding: 2em;
-            background-color: white;
-            width: 100vw;
+            background-color: #f2e1b0;
+            width: 50vw;
         }
 
         .skjul {
@@ -93,9 +125,10 @@
 </head>
 
 <body>
-    <h1>Alle</h1>
-
-
+    <div class="logo">
+        <h2>BISTRO BABUSKHA</h2>
+    </div>
+    <h1 class="skiftendetekst">Alle retter</h1>
     <nav>
         <button class="filter valgt" data-køn="alle">Alle retter</button>
         <button class="filter" data-køn="forretter">Foretter</button>
@@ -105,6 +138,8 @@
         <button class="filter" data-køn="drikkevarer">Drikkevarer</button>
 
     </nav>
+
+
 
     <section class="data-container"></section>
 
